@@ -83,8 +83,8 @@ async def ctest(_, message):
 
          img = Image.open("DAXXMUSIC/assets/cppic.png")
 
-         img1 = img1.resize((437,437))
-         img2 = img2.resize((437,437))
+         img1 = img1.resize((390,390))
+         img2 = img2.resize((390,390))
 
          mask = Image.new('L', img1.size, 0)
          draw = ImageDraw.Draw(mask) 
@@ -100,8 +100,8 @@ async def ctest(_, message):
 
          draw = ImageDraw.Draw(img)
 
-         img.paste(img1, (116, 160), img1)
-         img.paste(img2, (789, 160), img2)
+         img.paste(img1, (91, 215), img1)
+         img.paste(img2, (805, 215), img2)
 
          img.save(f'test_{cid}.png')
     
@@ -130,6 +130,7 @@ async def ctest(_, message):
         # c2_name = (await app.get_users(c2_id)).first_name
          
       #   TXT = f"""
+
 #**𝐓ᴏᴅᴀʏ's 𝐒ᴇʟᴇᴄᴛᴇᴅ 𝐂ᴏᴜᴘʟᴇs 🎉 :
 #➖➖➖➖➖➖➖➖➖➖➖➖
 #[{c1_name}](tg://openmessage?user_id={c1_id}) + [{c2_name}](tg://openmessage?user_id={c2_id}) = ❣️
@@ -148,36 +149,7 @@ async def ctest(_, message):
        pass
          
 
-__mod__ = "COUPLES"
-__help__ = """
-**» /couples** - Get Todays Couples Of The Group In Interactive View
+mod = "COUPLES"
+help = """
+» /couples - Get Todays Couples Of The Group In Interactive View
 """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
