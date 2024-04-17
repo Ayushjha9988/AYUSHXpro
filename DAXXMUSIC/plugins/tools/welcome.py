@@ -63,10 +63,10 @@ random_photo = [
 
 
 
-LOGGER = getLogger(__name__)
+LOGGER = getLogger(name)
 
 class WelDatabase:
-    def __init__(self):
+    def init(self):
         self.data = {}
 
     async def find_one(self, chat_id):
@@ -108,19 +108,19 @@ def welcomepic(pic, user, chatname, id, uname, brightness_factor=1.3):
     background = Image.open("DAXXMUSIC/assets/wel2.png")
     pfp = Image.open(pic).convert("RGBA")
     pfp = circle(pfp, brightness_factor=brightness_factor) 
-    pfp = pfp.resize((575, 575))
+    pfp = pfp.resize((825, 824))
     draw = ImageDraw.Draw(background)
     font = ImageFont.truetype('DAXXMUSIC/assets/font.ttf', size=70)
-    welcome_font = ImageFont.truetype('DAXXMUSIC/assets/font.ttf', size=61)
-    #draw.text((630, 540), f'ID: {id}', fill=(255, 255, 255), font=font)
+    welcome_font = ImageFont.truetype('DAXXMUSIC/assets/font.ttf', size=110)
+    #draw.text((2100, 1420), f'ID: {id}', fill=(12000, 12000, 12000), font=font)
     #
- #   draw.text((630, 300), f'NAME: {user}', fill=(255, 255, 255), font=font)
-    draw.text((630, 450), f'ID: {id}', fill=(255, 255, 255), font=font)
-#    draw.text((630, 150), f"{chatname}", fill=(225, 225, 225), font=welcome_font)
-  #  draw.text((630, 230), f"USERNAME : {uname}", fill=(255, 255, 255), font=font)
+ #   draw.text((2100, 1420), f'NAME: {user}', fill=(12000, 12000, 12000), font=font)
+    draw.text((2100, 1420), f'ID: {id}', fill=(12000, 12000, 12000), font=font)
+#    draw.text((2100, 1420), f"{chatname}", fill=(12000, 12000, 12000), font=welcome_font)
+  #  draw.text((2100, 1420), f"USERNAME : {uname}", fill=(12000, 12000, 12000), font=font)
 
-    #
-    pfp_position = (48, 88)
+#
+    pfp_position = (1990, 435)
     background.paste(pfp, pfp_position, pfp)
     background.save(f"downloads/welcome#{id}.png")
     return f"downloads/welcome#{id}.png"
@@ -128,7 +128,7 @@ def welcomepic(pic, user, chatname, id, uname, brightness_factor=1.3):
 
 @app.on_message(filters.command("welcome") & ~filters.private)
 async def auto_state(_, message):
-    usage = "**ᴜsᴀɢᴇ:**\n**⦿ /welcome [on|off]**"
+    usage = "ᴜsᴀɢᴇ:\n⦿ /welcome [on|off]"
     if len(message.command) == 1:
         return await message.reply_text(usage)
     chat_id = message.chat.id
@@ -141,20 +141,20 @@ async def auto_state(_, message):
         state = message.text.split(None, 1)[1].strip().lower()
         if state == "off":
             if A:
-                await message.reply_text("**ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ !**")
+                await message.reply_text("ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ !")
             else:
                 await wlcm.add_wlcm(chat_id)
-                await message.reply_text(f"**ᴅɪsᴀʙʟᴇᴅ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ɪɴ** {message.chat.title}")
+                await message.reply_text(f"ᴅɪsᴀʙʟᴇᴅ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ɪɴ {message.chat.title}")
         elif state == "on":
             if not A:
-                await message.reply_text("**ᴇɴᴀʙʟᴇ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ.**")
+                await message.reply_text("ᴇɴᴀʙʟᴇ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ.")
             else:
                 await wlcm.rm_wlcm(chat_id)
-                await message.reply_text(f"**ᴇɴᴀʙʟᴇᴅ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ɪɴ ** {message.chat.title}")
+                await message.reply_text(f"ᴇɴᴀʙʟᴇᴅ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ɪɴ  {message.chat.title}")
         else:
             await message.reply_text(usage)
     else:
-        await message.reply("**sᴏʀʀʏ ᴏɴʟʏ ᴀᴅᴍɪɴs ᴄᴀɴ ᴇɴᴀʙʟᴇ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ!**")
+        await message.reply("sᴏʀʀʏ ᴏɴʟʏ ᴀᴅᴍɪɴs ᴄᴀɴ ᴇɴᴀʙʟᴇ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ!")
 
 
 
@@ -194,16 +194,16 @@ async def greet_new_member(_, member: ChatMemberUpdated):
                 member.chat.id,
                 photo=welcomeimg,
                 caption=f"""
-**❅────✦ ᴡᴇʟᴄᴏᴍᴇ ✦────❅**
+❅────✦ ᴡᴇʟᴄᴏᴍᴇ ✦────❅
 
 ▰▰▰▰▰▰▰▰▰▰▰▰▰
-**➻ ɴᴀᴍᴇ »** {user.mention}
-**➻ ɪᴅ »** `{user.id}`
-**➻ ᴜ_ɴᴀᴍᴇ »** @{user.username}
-**➻ ᴛᴏᴛᴀʟ ᴍᴇᴍʙᴇʀs »** {count}
+➻ ɴᴀᴍᴇ » {user.mention}
+➻ ɪᴅ » {user.id}
+➻ ᴜ_ɴᴀᴍᴇ » @{user.username}
+➻ ᴛᴏᴛᴀʟ ᴍᴇᴍʙᴇʀs » {count}
 ▰▰▰▰▰▰▰▰▰▰▰▰▰
 
-**❅─────✧❅✦❅✧─────❅**
+❅─────✧❅✦❅✧─────❅
 """,
                 reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton(button_text, url=deep_link)],
@@ -218,7 +218,7 @@ async def greet_new_member(_, member: ChatMemberUpdated):
 async def add_all(client, message):
     command_parts = message.text.split(" ")
     if len(command_parts) != 2:
-        await message.reply("**⚠️ ɪɴᴠᴀʟɪᴅ ᴄᴏᴍᴍᴀɴᴅ ғᴏʀᴍᴀᴛ. ᴘʟᴇᴀsᴇ ᴜsᴇ ʟɪᴋᴇ » `/gadd bot username`**")
+        await message.reply("⚠️ ɪɴᴠᴀʟɪᴅ ᴄᴏᴍᴍᴀɴᴅ ғᴏʀᴍᴀᴛ. ᴘʟᴇᴀsᴇ ᴜsᴇ ʟɪᴋᴇ » /gadd bot username")
         return
 
     bot_username = command_parts[1]
@@ -228,26 +228,26 @@ async def add_all(client, message):
         app_id = bot.id
         done = 0
         failed = 0
-        lol = await message.reply("🔄 **ᴀᴅᴅɪɴɢ ɢɪᴠᴇɴ ʙᴏᴛ ɪɴ ᴀʟʟ ᴄʜᴀᴛs!**")
+        lol = await message.reply("🔄 ᴀᴅᴅɪɴɢ ɢɪᴠᴇɴ ʙᴏᴛ ɪɴ ᴀʟʟ ᴄʜᴀᴛs!")
 
-        async for dialog in userbot.get_dialogs():
+async for dialog in userbot.get_dialogs():
             if dialog.chat.id == -1002133369721:
                 continue
             try:
                 await userbot.add_chat_members(dialog.chat.id, app_id)
                 done += 1
                 await lol.edit(
-                    f"**🔂 ᴀᴅᴅɪɴɢ {bot_username}**\n\n**➥ ᴀᴅᴅᴇᴅ ɪɴ {done} ᴄʜᴀᴛs ✅**\n**➥ ғᴀɪʟᴇᴅ ɪɴ {failed} ᴄʜᴀᴛs ❌**\n\n**➲ ᴀᴅᴅᴇᴅ ʙʏ»** @{userbot.username}"
+                    f"🔂 ᴀᴅᴅɪɴɢ {bot_username}\n\n➥ ᴀᴅᴅᴇᴅ ɪɴ {done} ᴄʜᴀᴛs ✅\n➥ ғᴀɪʟᴇᴅ ɪɴ {failed} ᴄʜᴀᴛs ❌\n\n➲ ᴀᴅᴅᴇᴅ ʙʏ» @{userbot.username}"
                 )
             except Exception as e:
                 failed += 1
                 await lol.edit(
-                    f"**🔂 ᴀᴅᴅɪɴɢ {bot_username}**\n\n**➥ ᴀᴅᴅᴇᴅ ɪɴ {done} ᴄʜᴀᴛs ✅**\n**➥ ғᴀɪʟᴇᴅ ɪɴ {failed} ᴄʜᴀᴛs ❌**\n\n**➲ ᴀᴅᴅɪɴɢ ʙʏ»** @{userbot.username}"
+                    f"🔂 ᴀᴅᴅɪɴɢ {bot_username}\n\n➥ ᴀᴅᴅᴇᴅ ɪɴ {done} ᴄʜᴀᴛs ✅\n➥ ғᴀɪʟᴇᴅ ɪɴ {failed} ᴄʜᴀᴛs ❌\n\n➲ ᴀᴅᴅɪɴɢ ʙʏ» @{userbot.username}"
                 )
             await asyncio.sleep(3)  # Adjust sleep time based on rate limits
 
         await lol.edit(
-            f"**➻ {bot_username} ʙᴏᴛ ᴀᴅᴅᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ🎉**\n\n**➥ ᴀᴅᴅᴇᴅ ɪɴ {done} ᴄʜᴀᴛs ✅**\n**➥ ғᴀɪʟᴇᴅ ɪɴ {failed} ᴄʜᴀᴛs ❌**\n\n**➲ ᴀᴅᴅᴇᴅ ʙʏ»** @{userbot.username}"
+            f"➻ {bot_username} ʙᴏᴛ ᴀᴅᴅᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ🎉\n\n➥ ᴀᴅᴅᴇᴅ ɪɴ {done} ᴄʜᴀᴛs ✅\n➥ ғᴀɪʟᴇᴅ ɪɴ {failed} ᴄʜᴀᴛs ❌\n\n➲ ᴀᴅᴅᴇᴅ ʙʏ» @{userbot.username}"
         )
     except Exception as e:
         await message.reply(f"Error: {str(e)}")
