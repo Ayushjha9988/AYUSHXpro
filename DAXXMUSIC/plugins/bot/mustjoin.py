@@ -5,7 +5,7 @@ from DAXXMUSIC import app
 
 #--------------------------
 
-MUST_JOIN = "AboUt_BaBe"
+MUST_JOIN = "IlS_xD"
 #------------------------
 @app.on_message(filters.incoming & filters.private, group=-1)
 async def must_join_channel(app: Client, msg: Message):
